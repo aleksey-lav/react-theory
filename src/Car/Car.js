@@ -14,9 +14,20 @@ export default () => (
     <div style={{color: 'blue'}}>This is car component</div>
 )*/
 
+/*
 export default (props) => (
     <div>
         <h3>{props.name}</h3>
         <p>{props.year}</p>
+    </div>
+)*/
+
+//можно не писать круглые скобки в пропсах
+
+export default props => (
+    <div>
+        <h3>{props.name}</h3>
+        <p>{props.year}</p>
+        {props.children}
     </div>
 )
