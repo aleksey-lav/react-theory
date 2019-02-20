@@ -9,6 +9,14 @@ import React from 'react';
 
 // export default car;
 
+/*
 export default () => (
     <div style={{color: 'blue'}}>This is car component</div>
+)*/
+
+export default (props) => (
+    <div>
+        <h3>{props.name}</h3>
+        <p>{props.year}</p>
+    </div>
 )
