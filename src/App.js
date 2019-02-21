@@ -12,19 +12,14 @@ class App extends Component {
       ],
         pageTitle: 'React Theory About "State"'
     };
-
-    changeTitleHandler = () => {
+    changeTitleHandler = (newTitle) => {
         // console.log("clicked")
-
-        const oldTitle = this.state.pageTitle
-        const newTitle = oldTitle + ' (changed)';
+       /* const oldTitle = this.state.pageTitle
+        const newTitle = oldTitle + ' (changed)';*/
         this.setState({
             pageTitle: newTitle
         })
     };
-
-
-
   render() {
       const divStyle = {
         // 'text-alegn' : 'center'
@@ -37,16 +32,28 @@ class App extends Component {
       <div className="App" style={divStyle}>
           <h1 style={{color: 'tomato', fontSize: '48px', fontWeight: '700'}}>{this.state.pageTitle}</h1>
 
+          <button
+              onClick={this.changeTitleHandler.bind(this, 'Changed')}>Change Title and color
+          </button>
 
-          <button onClick={this.changeTitleHandler}>Change Title and color</button>
-         <Car name={cars[0].name} year={cars[0].year}/>
-         <Car name={cars[1].name} year={cars[1].year}/>
-         <Car name={cars[2].name} year={cars[2].year}/>
+         <Car name={cars[0].name}
+              year={cars[0].year}
+              //черехз bind более правильно
+              onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}
+         />
 
+         <Car name={cars[1].name}
+              year={cars[1].year}
+              onChangeTitle={() => this.changeTitleHandler(cars[1].name)}
+         />
+
+         <Car name={cars[2].name}
+              year={cars[2].year}
+              onChangeTitle={() => this.changeTitleHandler(cars[2].name)}
+         />
 
       </div>
     );
   }
 }
-
 export default App;

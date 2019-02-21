@@ -24,10 +24,11 @@ export default (props) => (
 
 //можно не писать круглые скобки в пропсах
 
-export default props => (
+export default (props) => (
     <div>
         <h3>{props.name}</h3>
         <p>{props.year}</p>
         {props.children}
+        <button onClick={props.onChangeTitle}>CLick</button>
     </div>
 )
