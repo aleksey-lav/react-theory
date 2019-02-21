@@ -40,10 +40,21 @@ class App extends Component {
 
           <input type="text" onChange={this.handleInput}/>
           <button
-              onClick={this.changeTitleHandler.bind(this, 'Changed')}>Change Title and color
+              onClick={this.changeTitleHandler.bind(this, 'Changed')}>Change Title
           </button>
 
-         <Car name={cars[0].name}
+          {this.state.cars.map((car, index) => {
+              return (
+                  <Car
+                      key={index}
+                      name={car.name}
+                      year={car.year}
+                      onChangeTitle={() => this.changeTitleHandler(car.name)}
+                  />
+              )
+          })}
+
+         {/*<Car name={cars[0].name}
               year={cars[0].year}
               //черехз bind более правильно
               onChangeTitle={this.changeTitleHandler.bind(this, cars[0].name)}
@@ -57,7 +68,7 @@ class App extends Component {
          <Car name={cars[2].name}
               year={cars[2].year}
               onChangeTitle={() => this.changeTitleHandler(cars[2].name)}
-         />
+         />*/}
 
       </div>
     );
