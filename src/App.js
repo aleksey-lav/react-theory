@@ -10,40 +10,44 @@ class App extends Component {
           {name: 'Toyota', year: '2010'},
           {name: 'Honda', year: '2019'}
       ],
-        pageTitle: 'React Theory About "State"'
+        pageTitle: 'React Theory About "State"',
+        showCars: false
     };
-    changeTitleHandler = (newTitle) => {
+    toggleCarsHandler = () => {
+        this.setState({
+            showCars: !this.state.showCars
+        })
+    };
+    changeTitleHandler = pageTitle => {
+        this.setState({pageTitle})
+    }
+
+   /* changeTitleHandler = (newTitle) => {
         // console.log("clicked")
-       /* const oldTitle = this.state.pageTitle
-        const newTitle = oldTitle + ' (changed)';*/
+       /!* const oldTitle = this.state.pageTitle
+        const newTitle = oldTitle + ' (changed)';*!/
         this.setState({
             pageTitle: newTitle
         })
-    };
+    };*/
 
-    handleInput = (event) => {
+    /*handleInput = (event) => {
         this.setState({
          pageTitle: event.target.value
         })
-    };
+    };*/
   render() {
       const divStyle = {
         // 'text-alegn' : 'center'
         textAlign: 'center'
       };
 
-      const cars = this.state.cars;
+      //const cars = this.state.cars;
 
-      return (
-      <div className="App" style={divStyle}>
-          <h1 style={{color: 'tomato', fontSize: '48px', fontWeight: '700'}}>{this.state.pageTitle}</h1>
-
-          <input type="text" onChange={this.handleInput}/>
-          <button
-              onClick={this.changeTitleHandler.bind(this, 'Changed')}>Change Title
-          </button>
-
-          {this.state.cars.map((car, index) => {
+      //second way to create toogle outside construction jsx
+      let cars = null;
+      if(this.state.showCars){
+          cars =  this.state.cars.map((car, index) => {
               return (
                   <Car
                       key={index}
@@ -52,7 +56,32 @@ class App extends Component {
                       onChangeTitle={() => this.changeTitleHandler(car.name)}
                   />
               )
-          })}
+          })
+      }
+      return (
+      <div className="App" style={divStyle}>
+          <h1 style={{color: 'tomato', fontSize: '48px', fontWeight: '700'}}>{this.state.pageTitle}</h1>
+
+          <input type="text" onChange={this.handleInput}/>
+          <button
+              onClick={this.toggleCarsHandler}>Toggle cars
+          </button>
+          {cars}
+
+          {/*first way to create toggle with jsx*/}
+         {/* {this.state.showCars ?
+              this.state.cars.map((car, index) => {
+                  return (
+                      <Car
+                          key={index}
+                          name={car.name}
+                          year={car.year}
+                          onChangeTitle={() => this.changeTitleHandler(car.name)}
+                      />
+                  )
+              })
+              : null
+          }*/}
 
          {/*<Car name={cars[0].name}
               year={cars[0].year}
@@ -73,5 +102,7 @@ class App extends Component {
       </div>
     );
   }
+
+
 }
 export default App;
